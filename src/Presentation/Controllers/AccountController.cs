@@ -1,4 +1,4 @@
-using DefiSeeker.Domain.Entities;
+using DefiSeeker.Domain.Dto;
 using DefiSeeker.Domain.Interfaces;
 
 
@@ -10,7 +10,7 @@ public static class AccountController
     {
         app.MapGet("/accounts/{stakeAddress}", async (string stakeAddress, IAccountAppService accountAppService) =>
         {
-            var result = await accountAppService.GetSpecificAccountAsync(stakeAddress);
+            var result = await accountAppService.GetStakeAccountInformationAsync(stakeAddress);
 
             if (result.IsFailed)
             {
@@ -20,7 +20,7 @@ public static class AccountController
             return Results.Ok(result.Value);
         })
         .WithName("GetAccount")
-        .Produces<SpecificAccount>(StatusCodes.Status200OK)
+        .Produces<StakeAddressInfo>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest);
     }
 }

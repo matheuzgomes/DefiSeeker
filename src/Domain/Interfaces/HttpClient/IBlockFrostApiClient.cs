@@ -1,5 +1,5 @@
 using Refit;
-using DefiSeeker.Domain.Entities;
+using DefiSeeker.Domain.Dto;
 using Microsoft.Extensions.Logging;
 
 namespace DefiSeeker.Domain.Interfaces.HttpClient;
@@ -7,7 +7,10 @@ namespace DefiSeeker.Domain.Interfaces.HttpClient;
 public interface IBlockFrostApiClient
 {
     [Get("/accounts/{stake_address}")]
-    Task<SpecificAccount> GetSpecificAccountAsync([AliasAs("stake_address")] string stakeAddress);
+    Task<StakeAddressInfo> GetStakeAccountInformationAsync([AliasAs("stake_address")] string stakeAddress);
+
+    [Get("/addresses/{address}")]
+    Task<AccountAddressInfo> GetAccountInformationAsync(string address);
 }
 
 

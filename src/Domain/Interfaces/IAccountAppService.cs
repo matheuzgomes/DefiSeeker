@@ -1,9 +1,9 @@
 using FluentResults;
-using DefiSeeker.Domain.Entities;
+using DefiSeeker.Domain.Dto;
 
 namespace DefiSeeker.Domain.Interfaces;
 
 public interface IAccountAppService
 {
-    Task<Result<SpecificAccount>> GetSpecificAccountAsync(string stakeAddress);
+    Task<Result<StakeAddressInfo>> GetStakeAccountInformationAsync(string stakeAddress);
 }
