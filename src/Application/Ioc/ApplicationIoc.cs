@@ -1,0 +1,15 @@
+using DefiSeeker.Domain.Interfaces;
+using DefiSeeker.Application.AppServices;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace DefiSeeker.Application;
+
+public static class ApplicationIoc
+{
+    public static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+        services.AddScoped<IAccountAppService, AccountAppService>();
+
+        return services;
+    }
+}
