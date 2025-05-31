@@ -1,3 +1,5 @@
+using DefiSeeker.Presentation.Controllers;
+
 namespace DefiSeeker.Presentation;
 
 public static class PresentationIoc
@@ -13,5 +15,13 @@ public static class PresentationIoc
         services.AddEndpointsApiExplorer();
 
         return services;
+    }
+
+
+    public static WebApplication MapEndpoints(this WebApplication app)
+    {
+        app.MapWalletsEndpoints();
+
+        return app;
     }
 }

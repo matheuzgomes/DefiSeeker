@@ -1,16 +1,16 @@
 using FluentResults;
 using DefiSeeker.Domain.Dto;
-using DefiSeeker.Domain.Interfaces;
+using DefiSeeker.Application.Interfaces;
 using DefiSeeker.Domain.Interfaces.HttpClient;
 using Microsoft.Extensions.Logging;
 
 namespace DefiSeeker.Application.AppServices;
 
-public sealed class AccountAppService(
+public sealed class WalletAppService(
     IBlockFrostApiClient blockFrostApiClient,
-    ILogger<AccountAppService> logger) : IAccountAppService
+    ILogger<WalletAppService> logger) : IWalletAppService
 {
-    private readonly ILogger<AccountAppService> _logger = logger;
+    private readonly ILogger<WalletAppService> _logger = logger;
     private readonly IBlockFrostApiClient _blockFrostApiClient = blockFrostApiClient;
 
     public async Task<Result<StakeAddressInfo>> GetStakeAccountInformationAsync(string stakeAddress)

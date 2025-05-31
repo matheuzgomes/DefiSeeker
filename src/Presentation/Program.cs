@@ -1,18 +1,18 @@
 using DefiSeeker.Presentation;
 using DefiSeeker.Application;
 using DefiSeeker.Domain;
-using DefiSeeker.Presentation.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwagger();
 builder.Services.AddApplication();
 builder.Services.AddDomain();
+builder.Services.AddBlockFrostClient();
 
 
 var app = builder.Build();
 
-app.MapAccountsEndpoints();
+app.MapEndpoints();
 app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())

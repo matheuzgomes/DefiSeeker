@@ -1,4 +1,4 @@
-using DefiSeeker.Domain.Interfaces;
+using DefiSeeker.Application.Interfaces;
 using DefiSeeker.Application.AppServices;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +8,7 @@ public static class ApplicationIoc
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<IAccountAppService, AccountAppService>();
+        services.AddScoped<IWalletAppService, WalletAppService>();
 
         return services;
     }
