@@ -14,14 +14,20 @@ public static class WalletController
 
             if (result.IsFailed)
             {
-                return Results.BadRequest(result.Errors);
-            }
+                var errorMessage = result.Errors.FirstOrDefault()?.Message ?? "Unknown error";
 
+                if (errorMessage.Contains("not found", StringComparison.OrdinalIgnoreCase))
+                    return Results.NotFound(errorMessage);
+
+                return Results.BadRequest(errorMessage);
+            }
+    
             return Results.Ok(result.Value);
         })
         .WithName("GetStakeInformation")
         .Produces<StakeAddressInfo>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status400BadRequest);
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .ProducesProblem(StatusCodes.Status404NotFound);
 
         app.MapGet("/wallets/{address}", async (string address, IWalletAppService walletAppService) =>
         {

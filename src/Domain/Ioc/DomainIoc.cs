@@ -3,6 +3,8 @@
 
 using DefiSeeker.Domain.Interfaces.HttpClient;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http.Resilience;
+using Polly;
 using Refit;
 
 namespace DefiSeeker.Domain;
@@ -29,7 +31,22 @@ public static class DomainIoc
 
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             })
-            .AddHttpMessageHandler<BlockFrostMessageHandler>();
+            .AddHttpMessageHandler<BlockFrostMessageHandler>()
+            .AddStandardResilienceHandler(builder =>
+            {
+                builder.Retry = new HttpRetryStrategyOptions
+                {
+                    MaxRetryAttempts = 2,
+                    Delay = TimeSpan.FromSeconds(1),
+                    UseJitter = true,
+                    BackoffType = DelayBackoffType.Exponential
+                };
+
+                builder.TotalRequestTimeout = new HttpTimeoutStrategyOptions
+                {
+                    Timeout = TimeSpan.FromSeconds(30)
+                };
+            });
 
         return services;
     }
