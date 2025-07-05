@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace DefiSeeker.Domain.Dto;
 
-public sealed class StakeAddressInfo
+public sealed class StakeAddressInfoResponse
 {
     [JsonPropertyName("stake_address")]
     public string? StakeAddress { get; set; }

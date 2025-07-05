@@ -1,16 +1,21 @@
 using DefiSeeker.Domain.Dto;
-using DefiSeeker.Application.Interfaces;
+using Asp.Versioning.Builder;
+using DefiSeeker.Domain.Interfaces;
 
 
 namespace DefiSeeker.Presentation.Controllers;
 
 public static class WalletController
 {
-    public static void MapWalletsEndpoints(this WebApplication app)
+    public static void MapWalletsEndpoints(this WebApplication app, ApiVersionSet apiVersion)
     {
-        app.MapGet("/wallets/stake/{stakeAddress}", async (string stakeAddress, IWalletAppService walletAppService) =>
+        var walletMapping = app.MapGroup("/api/v{version:apiVersion}/wallet")
+            .WithApiVersionSet(apiVersion)
+            .WithTags("Wallets");
+
+        walletMapping.MapGet("stake/{stakeAddress}", async (string stakeAddress, IWalletAppService walletAppService) =>
         {
-            var result = await walletAppService.GetStakeAccountInformationAsync(stakeAddress);
+            var result = await walletAppService.GetWalletByStakeAddressAsync(stakeAddress);
 
             if (result.IsFailed)
             {
@@ -21,17 +26,17 @@ public static class WalletController
 
                 return Results.BadRequest(errorMessage);
             }
-    
+
             return Results.Ok(result.Value);
         })
         .WithName("GetStakeInformation")
-        .Produces<StakeAddressInfo>(StatusCodes.Status200OK)
+        .Produces<StakeAddressInfoResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound);
 
-        app.MapGet("/wallets/{address}", async (string address, IWalletAppService walletAppService) =>
+        walletMapping.MapGet("detail/{address}", async (string address, IWalletAppService walletAppService) =>
         {
-            var result = await walletAppService.GetAccountInformationAsync(address);
+            var result = await walletAppService.GetAddressDetailAsync(address);
 
             if (result.IsFailed)
             {
@@ -41,7 +46,22 @@ public static class WalletController
             return Results.Ok(result.Value);
         })
         .WithName("GetWalletInformation")
-        .Produces<AccountAddressInfo>(StatusCodes.Status200OK)
+        .Produces<WalletInfoResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest);
+
+        walletMapping.MapGet("detail/{address}/utxo", async (string address, IWalletAppService walletAppService) =>
+        {
+            var result = await walletAppService.GetAddressDetailAsync(address);
+
+            if (result.IsFailed)
+            {
+                return Results.BadRequest(result.Errors);
+            }
+
+            return Results.Ok(result.Value);
+        })
+        .WithName("GetWalletDetail")
+        .Produces<WalletUtxoResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest);
     }
 }

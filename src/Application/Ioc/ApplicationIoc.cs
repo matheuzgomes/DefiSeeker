@@ -1,4 +1,4 @@
-using DefiSeeker.Application.Interfaces;
+using DefiSeeker.Domain.Interfaces;
 using DefiSeeker.Application.AppServices;
 using Microsoft.Extensions.DependencyInjection;
 

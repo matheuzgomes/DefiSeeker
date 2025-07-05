@@ -1,3 +1,4 @@
+using Asp.Versioning.Builder;
 using DefiSeeker.Presentation.Controllers;
 
 namespace DefiSeeker.Presentation;
@@ -18,9 +19,9 @@ public static class PresentationIoc
     }
 
 
-    public static WebApplication MapEndpoints(this WebApplication app)
+    public static WebApplication MapEndpoints(this WebApplication app, ApiVersionSet apiVersion)
     {
-        app.MapWalletsEndpoints();
+        app.MapWalletsEndpoints(apiVersion);
 
         return app;
     }

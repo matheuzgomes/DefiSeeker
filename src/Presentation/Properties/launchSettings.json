@@ -16,7 +16,8 @@
       "applicationUrl": "http://localhost:5147",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BLOCKFROST_PROJECT_ID": "mainnetJUkbY8NIk1aDeXiiwqCviEpDa9CKRyQn"
+        "BLOCKFROST_PROJECT_ID": "mainnetJUkbY8NIk1aDeXiiwqCviEpDa9CKRyQn",
+        "BLOCKFROST_API_URL": "https://cardano-mainnet.blockfrost.io/api/v0",
       }
     },
     "https": {

@@ -1,6 +1,3 @@
-
-
-
 using DefiSeeker.Domain.Interfaces.HttpClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
@@ -9,12 +6,11 @@ using Refit;
 
 namespace DefiSeeker.Domain;
 
-
 public static class DomainIoc
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        return services;
+        return AddBlockFrostClient(services);
     }
 
     public static IServiceCollection AddBlockFrostClient(this IServiceCollection services)

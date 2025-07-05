@@ -2,13 +2,13 @@ using System.Text.Json.Serialization;
 
 namespace DefiSeeker.Domain.Dto;
 
-public class AccountAddressInfo
+public class WalletInfoResponse
 {
     [JsonPropertyName("address")]
     public string? Address { get; set; }
 
     [JsonPropertyName("amount")]
-    public List<AccountAmount>? Amount { get; set; }
+    public List<CurrencyAmount>? Amount { get; set; }
 
     [JsonPropertyName("stake_address")]
     public string? StakeAddress { get; set; }
@@ -18,13 +18,4 @@ public class AccountAddressInfo
 
     [JsonPropertyName("script")]
     public bool Script { get; set; }
-}
-
-public class AccountAmount
-{
-    [JsonPropertyName("unit")]
-    public string? Unit { get; set; }
-
-    [JsonPropertyName("quantity")]
-    public string? Quantity { get; set; }
 }
