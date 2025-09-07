@@ -1,3 +1,4 @@
+using DefiSeeker.Domain.Handlers;
 using DefiSeeker.Domain.Interfaces.HttpClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
