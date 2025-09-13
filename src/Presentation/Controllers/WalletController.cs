@@ -1,6 +1,6 @@
 using DefiSeeker.Domain.Dto;
 using Asp.Versioning.Builder;
-using DefiSeeker.Domain.Interfaces;
+using DefiSeeker.Application.Interfaces;
 
 
 namespace DefiSeeker.Presentation.Controllers;
@@ -9,7 +9,7 @@ public static class WalletController
 {
     public static void MapWalletsEndpoints(this WebApplication app, ApiVersionSet apiVersion)
     {
-        var walletMapping = app.MapGroup("/api/v{version:apiVersion}/wallet")
+        var walletMapping = app.MapGroup("/api/v{version:apiVersion}/wallets")
             .WithApiVersionSet(apiVersion)
             .WithTags("Wallets");
 
@@ -34,9 +34,9 @@ public static class WalletController
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound);
 
-        walletMapping.MapGet("detail/{address}", async (string address, IWalletAppService walletAppService) =>
+        walletMapping.MapGet("{address}", async (string address, IWalletAppService walletAppService) =>
         {
-            var result = await walletAppService.GetAddressDetailAsync(address);
+            var result = await walletAppService.GetWalletByAddressAsync(address);
 
             if (result.IsFailed)
             {
@@ -49,7 +49,7 @@ public static class WalletController
         .Produces<WalletInfoResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest);
 
-        walletMapping.MapGet("detail/{address}/utxo", async (string address, IWalletAppService walletAppService) =>
+        walletMapping.MapGet("{address}/utxo", async (string address, IWalletAppService walletAppService) =>
         {
             var result = await walletAppService.GetAddressDetailAsync(address);
 

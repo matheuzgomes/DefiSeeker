@@ -1,13 +1,13 @@
 using DefiSeeker.Presentation;
 using DefiSeeker.Application;
-using DefiSeeker.Domain;
 using Asp.Versioning;
+using DefiSeeker.Infastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwagger();
 builder.Services.AddApplication();
-builder.Services.AddDomain();
+builder.Services.AddBlockFrostClient();
 
 builder.Services.AddApiVersioning(options =>
 {

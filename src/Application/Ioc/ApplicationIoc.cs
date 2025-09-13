@@ -1,6 +1,6 @@
-using DefiSeeker.Domain.Interfaces;
 using DefiSeeker.Application.AppServices;
 using Microsoft.Extensions.DependencyInjection;
+using DefiSeeker.Application.Interfaces;
 
 namespace DefiSeeker.Application;
 
