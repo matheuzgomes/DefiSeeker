@@ -1,7 +1,7 @@
 using FluentResults;
 using DefiSeeker.Domain.Dto;
 
-namespace DefiSeeker.Domain.Interfaces;
+namespace DefiSeeker.Application.Interfaces;
 
 public interface IWalletAppService
 {

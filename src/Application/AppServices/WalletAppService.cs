@@ -1,9 +1,9 @@
 using FluentResults;
 using DefiSeeker.Domain.Dto;
-using DefiSeeker.Domain.Interfaces;
-using DefiSeeker.Domain.Interfaces.HttpClient;
 using Microsoft.Extensions.Logging;
 using DefiSeeker.Shared;
+using DefiSeeker.Infastructure.HttpClient;
+using DefiSeeker.Application.Interfaces;
 
 namespace DefiSeeker.Application.AppServices;
 

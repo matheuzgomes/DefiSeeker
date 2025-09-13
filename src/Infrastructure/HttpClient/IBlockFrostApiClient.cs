@@ -1,7 +1,7 @@
 using Refit;
 using DefiSeeker.Domain.Dto;
 
-namespace DefiSeeker.Domain.Interfaces.HttpClient;
+namespace DefiSeeker.Infastructure.HttpClient;
 
 public interface IBlockFrostApiClient
 {

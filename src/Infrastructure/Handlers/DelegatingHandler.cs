@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace DefiSeeker.Domain.Handlers;
+namespace DefiSeeker.Infastructure.Handlers;
 
 public class BlockFrostMessageHandler(ILogger<BlockFrostMessageHandler> logger) : DelegatingHandler
 {

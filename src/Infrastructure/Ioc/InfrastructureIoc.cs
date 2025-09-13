@@ -1,20 +1,14 @@
-
-using DefiSeeker.Domain.Handlers;
-using DefiSeeker.Domain.Interfaces.HttpClient;
+using DefiSeeker.Infastructure.Handlers;
+using DefiSeeker.Infastructure.HttpClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
 using Refit;
 
-namespace DefiSeeker.Domain;
+namespace DefiSeeker.Infastructure;
 
-public static class DomainIoc
+public static class InfrastructureIoc
 {
-    public static IServiceCollection AddDomain(this IServiceCollection services)
-    {
-        return AddBlockFrostClient(services);
-    }
-
     public static IServiceCollection AddBlockFrostClient(this IServiceCollection services)
     {
         services.AddTransient<BlockFrostMessageHandler>();
@@ -47,5 +41,5 @@ public static class DomainIoc
             });
 
         return services;
-    }
+    }   
 }
