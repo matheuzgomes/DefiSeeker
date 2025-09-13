@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 
 namespace DefiSeeker.Domain.Dto;
 
-
 public sealed record WalletUtxoResponse
 {
     public required string Address { get; init; }

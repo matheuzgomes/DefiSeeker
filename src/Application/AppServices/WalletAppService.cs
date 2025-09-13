@@ -20,22 +20,22 @@ public sealed class WalletAppService(
         {
             var result = await _blockFrostApiClient.GetStakeAccountInformationAsync(stakeAddress);
 
-            if (RequestChecker.IsSuccessful(result))
+            if (result.IsFailed())
             {
-                _logger.LogInformation(
+                _logger.LogError(
+                    "Failed to fetch wallet information for stake address: {StakeAddress}. Status code: {StatusCode}. Error: {Error}",
+                    stakeAddress,
+                    result.StatusCode,
+                    result.Error?.Message ?? "Unknown error");
+
+                return Result.Fail("Failed to fetch wallet information");
+            }
+
+            _logger.LogInformation(
                     "Successfully fetched wallet information for stake address: {StakeAddress}",
                     stakeAddress);
 
-                return Result.Ok(result.Content!);
-            }
-
-            _logger.LogError(
-                "Failed to fetch wallet information for stake address: {StakeAddress}. Status code: {StatusCode}. Error: {Error}",
-                stakeAddress,
-                result.StatusCode,
-                result.Error?.Message ?? "Unknown error");
-
-            return Result.Fail("Failed to fetch wallet information");
+            return Result.Ok(result.Content!);
         }
         catch (Exception ex)
         {
@@ -54,23 +54,22 @@ public sealed class WalletAppService(
         {
             var result = await _blockFrostApiClient.GetAccountInformationAsync(address);
 
-
-            if (RequestChecker.IsSuccessful(result))
+            if (result.IsFailed())
             {
-                _logger.LogInformation(
+                _logger.LogError(
+                    "Failed to fetch wallet information for address: {Address}. Status code: {StatusCode}. Error: {Error}",
+                    address,
+                    result.StatusCode,
+                    result.Error?.Message ?? "Unknown error");
+
+                return Result.Fail("Failed to fetch wallet information");
+            }
+
+            _logger.LogInformation(
                     "Successfully fetched wallet information for address: {Address}",
                     address);
 
-                return Result.Ok(result.Content!);
-            }
-
-            _logger.LogError(
-                "Failed to fetch wallet information for address: {Address}. Status code: {StatusCode}. Error: {Error}",
-                address,
-                result.StatusCode,
-                result.Error?.Message ?? "Unknown error");
-
-            return Result.Fail("Failed to fetch wallet information");
+            return Result.Ok(result.Content!);
         }
         catch (Exception ex)
         {
@@ -89,23 +88,22 @@ public sealed class WalletAppService(
         {
             var result = await _blockFrostApiClient.GetAddressDetailAsync(address);
 
-
-            if (RequestChecker.IsSuccessful(result))
+            if (result.IsFailed())
             {
-                _logger.LogInformation(
+                _logger.LogError(
+                    "Failed to fetch wallet details for address: {Address}. Status code: {StatusCode}. Error: {Error}",
+                    address,
+                    result.StatusCode,
+                    result.Error?.Message ?? "Unknown error");
+
+                return Result.Fail("Failed to fetch wallet details");
+            }
+
+            _logger.LogInformation(
                     "Successfully fetched wallet information for address: {Address}",
                     address);
 
-                return Result.Ok(result.Content!);
-            }
-
-            _logger.LogError(
-                "Failed to fetch wallet details for address: {Address}. Status code: {StatusCode}. Error: {Error}",
-                address,
-                result.StatusCode,
-                result.Error?.Message ?? "Unknown error");
-
-            return Result.Fail("Failed to fetch wallet details");
+            return Result.Ok(result.Content!);
         }
         catch (Exception ex)
         {

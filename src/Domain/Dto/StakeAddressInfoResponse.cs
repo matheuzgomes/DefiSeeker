@@ -7,7 +7,6 @@ public sealed class StakeAddressInfoResponse
     [JsonPropertyName("stake_address")]
     public string? StakeAddress { get; set; }
 
-    [JsonPropertyName("active")]
     public bool Active { get; set; }
 
     [JsonPropertyName("active_epoch")]

@@ -1,6 +1,5 @@
 using Refit;
 using DefiSeeker.Domain.Dto;
-using Microsoft.Extensions.Logging;
 
 namespace DefiSeeker.Domain.Interfaces.HttpClient;
 
