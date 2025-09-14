@@ -9,6 +9,9 @@ builder.Services.AddSwagger();
 builder.Services.AddApplication();
 builder.Services.AddBlockFrostClient();
 
+builder.Services.AddCors();
+builder.Services.AddHealthChecks();
+
 builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1);
@@ -27,6 +30,13 @@ builder.Services.AddApiVersioning(options =>
 
 var app = builder.Build();
 
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin()
+          .AllowAnyHeader()
+          .AllowAnyMethod();
+});
+
 var apiVersion = app.NewApiVersionSet()
     .HasApiVersion(new ApiVersion(1))
     .ReportApiVersions()
@@ -34,6 +44,7 @@ var apiVersion = app.NewApiVersionSet()
 
 app.MapEndpoints(apiVersion);
 app.UseHttpsRedirection();
+app.UseHealthChecks("/healthz");
 
 if (app.Environment.IsDevelopment())
 {
