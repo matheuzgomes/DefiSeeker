@@ -9,6 +9,7 @@ public static class ApplicationIoc
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<IWalletAppService, WalletAppService>();
+        services.AddScoped<INetworkAppService, NetworkAppService>();
 
         return services;
     }

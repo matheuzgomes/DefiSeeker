@@ -13,4 +13,7 @@ public interface IBlockFrostApiClient
 
     [Get("/addresses/{address}/total")]
     Task<IApiResponse<WalletUtxoResponse>> GetAddressDetailAsync(string address);
+
+    [Get("/network")]
+    Task<IApiResponse<NetworkInfoResponse>> GetNetworkInformationAsync();
 }

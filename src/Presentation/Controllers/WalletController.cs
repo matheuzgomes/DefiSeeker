@@ -2,7 +2,6 @@ using DefiSeeker.Domain.Dto;
 using Asp.Versioning.Builder;
 using DefiSeeker.Application.Interfaces;
 
-
 namespace DefiSeeker.Presentation.Controllers;
 
 public static class WalletController

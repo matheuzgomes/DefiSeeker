@@ -22,6 +22,7 @@ public static class PresentationIoc
     public static WebApplication MapEndpoints(this WebApplication app, ApiVersionSet apiVersion)
     {
         app.MapWalletsEndpoints(apiVersion);
+        app.MapNetworkEndpoints(apiVersion);
 
         return app;
     }
